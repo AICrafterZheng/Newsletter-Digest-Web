@@ -1,15 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import { config } from './config';
 
 const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_ANON_KEY!
+  config.supabase.url!,
+  config.supabase.anonKey!
 );
-const supabaseTable = process.env.SUPABASE_TABLE!;
+const supabaseTable = config.supabase.table!;
 const app = express();
 
 app.use(express.json());
