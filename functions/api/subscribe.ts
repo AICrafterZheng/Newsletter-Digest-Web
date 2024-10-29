@@ -15,13 +15,11 @@ export const onRequest: PagesFunction = async (context) => {
 
   try {
     const { email } = await context.request.json();
-    
     // Initialize Supabase
     const supabase = createClient(
       context.env.SUPABASE_URL,
       context.env.SUPABASE_ANON_KEY
     );
-
     // Check for existing subscriber
     const { data: existingSubscriber } = await supabase
       .from(context.env.SUPABASE_TABLE)
