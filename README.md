@@ -20,7 +20,7 @@ npm run build
 ### Then run wrangler pages dev pointing to the dist directory:
 
 ```bash
-npx wrangler pages dev dist
+npx wrangler pages dev dist
 ```
 
 ## Deploy to Cloudflare Pages:

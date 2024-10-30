@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 
-export const onRequest: PagesFunction = async (context) => {
+export const onRequest = async (context: any) => {
   // CORS headers for local development and production
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
@@ -29,7 +29,7 @@ export const onRequest: PagesFunction = async (context) => {
 
     if (existingSubscriber) {
       return new Response(
-        JSON.stringify({ error: 'Email already subscribed' }), 
+        JSON.stringify({ error: 'Email already subscribed' }),
         { 
           status: 409, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
@@ -57,7 +57,7 @@ export const onRequest: PagesFunction = async (context) => {
   } catch (error) {
     console.error('Subscription error:', error);
     return new Response(
-      JSON.stringify({ error: 'Internal server error' }), 
+      JSON.stringify({ error: `Internal server error` }), 
       { 
         status: 500, 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' } 

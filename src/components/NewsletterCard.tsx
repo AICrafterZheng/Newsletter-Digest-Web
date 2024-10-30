@@ -6,7 +6,7 @@ export function NewsletterCard() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
   const supabaseApiUrl = import.meta.env.VITE_SUBSCRIBE_API_URL;
-
+  console.log(supabaseApiUrl);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
