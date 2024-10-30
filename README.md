@@ -14,13 +14,14 @@ cp .env.example .env.development
 ### First, build your frontend (assuming you're in the project root):
 
 ```bash
-npm run build
+npm run dev
 ```
+> This will use VITE_SUBSCRIBE_API_URL from .env.development, which is served by the Cloudflare Functions.
 
-### Then run wrangler pages dev pointing to the dist directory:
+### Then run Cloudflare Pages locally:
 
 ```bash
-npx wrangler pages dev dist
+npx wrangler pages dev ./
 ```
 
 ## Deploy to Cloudflare Pages:
