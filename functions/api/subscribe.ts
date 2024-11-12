@@ -20,11 +20,12 @@ export const onRequest = async (context: any) => {
       context.env.SUPABASE_URL,
       context.env.SUPABASE_ANON_KEY
     );
-    // Check for existing subscriber
+    // Check for existing subscriber and unsubscribed field is false
     const { data: existingSubscriber } = await supabase
       .from(context.env.SUPABASE_TABLE)
       .select()
       .eq('email', email)
+      .eq('unsubscribed', false)
       .single();
 
     if (existingSubscriber) {
@@ -37,10 +38,10 @@ export const onRequest = async (context: any) => {
       );
     }
 
-    // Add new subscriber
+    // Add new subscriber or update unsubscribed field to false
     const { data: subscriber, error } = await supabase
       .from(context.env.SUPABASE_TABLE)
-      .insert([{ email }])
+      .upsert([{ email, unsubscribed: false }], { onConflict: 'email' })
       .select()
       .single();
 
