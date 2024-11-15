@@ -16,7 +16,7 @@ cp .env.example .env.development
 ```bash
 npm run dev
 ```
-> This will use VITE_SUBSCRIBE_API_URL from .env.development, which is served by the Cloudflare Functions.
+> This will use VITE_BACKEND_API_URL from .env.development, which is served by the Cloudflare Functions.
 
 ### Then run Cloudflare Pages locally:
 

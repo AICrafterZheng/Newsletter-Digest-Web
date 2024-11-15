@@ -5,13 +5,13 @@ export function NewsletterCard() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
-  const supabaseApiUrl = import.meta.env.VITE_SUBSCRIBE_API_URL;
-  console.log(supabaseApiUrl);
+  const apiUrl = import.meta.env.VITE_BACKEND_API_URL;
+  console.log(apiUrl);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
     try {
-      const response = await fetch(`${supabaseApiUrl}/subscribe`, {
+      const response = await fetch(`${apiUrl}/subscribe`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

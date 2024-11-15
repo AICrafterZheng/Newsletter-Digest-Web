@@ -22,7 +22,7 @@ export const onRequest = async (context: any) => {
     );
     // Check for existing subscriber and unsubscribed field is false
     const { data: existingSubscriber } = await supabase
-      .from(context.env.SUPABASE_TABLE)
+      .from(context.env.SUPABASE_TABLE_SUBSCRIBERS)
       .select()
       .eq('email', email)
       .eq('unsubscribed', false)
@@ -40,7 +40,7 @@ export const onRequest = async (context: any) => {
 
     // Add new subscriber or update unsubscribed field to false
     const { data: subscriber, error } = await supabase
-      .from(context.env.SUPABASE_TABLE)
+      .from(context.env.SUPABASE_TABLE_SUBSCRIBERS)
       .upsert([{ email, unsubscribed: false }], { onConflict: 'email' })
       .select()
       .single();
