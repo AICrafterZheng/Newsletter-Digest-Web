@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import AIFrontiersArticle from './components/Newsletters';
 
 function App() {
   return (
@@ -8,7 +9,8 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          {/* Add more routes as needed */}
+          {/* add the article page */}
+          <Route path="/article/:id" element={<AIFrontiersArticle />} />
         </Route>
       </Routes>
     </BrowserRouter>

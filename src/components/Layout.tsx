@@ -1,10 +1,7 @@
 import { Header } from './Header';
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
-import {
-  Dialog,
-  DialogContent,
-} from "@/components/ui/dialog";
+import Modal from "./Modal"
 import { SubscribeNewsletterCard } from './SubNewsletterCard';
 import { DiscordCard } from './DiscordCard';
 
@@ -14,26 +11,25 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-      <Header 
-        onSubscribeClick={() => setShowSubscribe(true)}
-        onDiscordClick={() => setShowDiscord(true)}
-      />
-      
-      <Outlet />
-      
-      {/* Subscribe Modal */}
-      <Dialog open={showSubscribe} onOpenChange={setShowSubscribe}>
-        <DialogContent className="sm:max-w-[500px] p-0">
-          <SubscribeNewsletterCard />
-        </DialogContent>
-      </Dialog>
+    <Header 
+      onSubscribeClick={() => setShowSubscribe(true)}
+      onDiscordClick={() => setShowDiscord(true)}
+    />
+    
+    <main className="relative pt-24 px-4 pb-16">
+      <div className="max-w-6xl mx-auto">
+        <Outlet />
+      </div>
+    </main>
 
-      {/* Discord Modal */}
-      <Dialog open={showDiscord} onOpenChange={setShowDiscord}>
-        <DialogContent className="sm:max-w-[500px] p-0">
-          <DiscordCard />
-        </DialogContent>
-      </Dialog>
+    {/* Modals */}
+    <Modal isOpen={showSubscribe} onClose={() => setShowSubscribe(false)}>
+      <SubscribeNewsletterCard />
+    </Modal>
+
+    <Modal isOpen={showDiscord} onClose={() => setShowDiscord(false)}>
+        <DiscordCard />
+    </Modal>
     </div>
   );
 }
