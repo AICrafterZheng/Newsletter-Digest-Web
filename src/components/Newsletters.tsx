@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { formatSummary } from '../utils/formatSummary'
-
 // Types
 interface Story {
   story_id: number
@@ -134,7 +133,7 @@ export default function AIFrontiersArticle({ source, limit }: NewsletterProps) {
   })
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="relative z-0">
       {/* Add the styles to the component */}
       <style>{summaryStyles}</style>
       

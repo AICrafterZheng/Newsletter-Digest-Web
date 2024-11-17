@@ -2,12 +2,12 @@ import { MessageSquare, Check } from 'lucide-react';
 
 export function DiscordCard() {
   return (
-    <div className="bg-indigo-600 rounded-3xl p-8 text-white shadow-lg">
+    <div className="bg-white rounded-3xl p-8 text-gray-900 shadow-lg">
       <div className="flex items-center gap-3 mb-4">
-        <MessageSquare className="w-6 h-6" />
+        <MessageSquare className="w-6 h-6 text-[#5865F2]" />
         <h2 className="text-2xl font-semibold">Discord Community</h2>
       </div>
-      <p className="text-indigo-100 mb-8">
+      <p className="text-gray-600 mb-8">
         Join our vibrant Discord community to connect, share, and grow with fellow members.
       </p>
       <div className="mb-8">
@@ -19,8 +19,8 @@ export function DiscordCard() {
             'Networking opportunities'
           ].map((benefit, index) => (
             <li key={index} className="flex items-center gap-3">
-              <Check className="w-5 h-5 text-indigo-200" />
-              <span className="text-indigo-100">{benefit}</span>
+              <Check className="w-5 h-5 text-[#5865F2]" />
+              <span className="text-gray-600">{benefit}</span>
             </li>
           ))}
         </ul>
@@ -29,7 +29,7 @@ export function DiscordCard() {
         href="https://discord.gg/your-invite-link"
         target="_blank"
         rel="noopener noreferrer"
-        className="block w-full bg-white text-indigo-600 font-semibold py-3 px-6 rounded-xl hover:bg-indigo-50 transition-colors text-center flex items-center justify-center gap-2"
+        className="block w-full bg-[#5865F2] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#4752C4] transition-colors text-center flex items-center justify-center gap-2"
       >
         <MessageSquare className="w-5 h-5" />
         Join Discord
