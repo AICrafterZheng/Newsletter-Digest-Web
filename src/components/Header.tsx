@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Send, MessageSquare, Github } from 'lucide-react';
+import { Send, MessageSquare, Github, Archive } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
 
 interface GitHubStats {
   stars: number;
@@ -15,6 +16,11 @@ interface HeaderProps {
 // Update the component declaration to use the props interface
 export const Header: React.FC<HeaderProps> = ({ onSubscribeClick, onDiscordClick }) => {
   const [githubStats, setGithubStats] = useState<GitHubStats>({ stars: 0, forks: 0 });
+
+  const navigate = useNavigate();
+  const onArchiveClick = () => {
+    navigate(`/archive`);
+  };
 
   useEffect(() => {
     // Replace with your GitHub repo details
@@ -36,7 +42,9 @@ export const Header: React.FC<HeaderProps> = ({ onSubscribeClick, onDiscordClick
     <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 border-b border-gray-200">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <h1 className="text-xl font-bold text-gray-900">AI Frontiers</h1>
+          <Link to="/" className="hover:opacity-80 transition-opacity">
+            <h1 className="text-xl font-bold text-gray-900">AI Frontiers</h1>
+          </Link>
         </div>
 
         <div className="flex items-center gap-4">
@@ -54,6 +62,14 @@ export const Header: React.FC<HeaderProps> = ({ onSubscribeClick, onDiscordClick
           >
             <MessageSquare className="w-4 h-4 sm:block hidden" />
             Discord
+          </button>
+
+          <button
+            onClick={onArchiveClick}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors sm:text-base text-sm"
+          >
+            <Archive className="w-4 h-4 sm:block hidden" />
+            Archive
           </button>
 
           <a

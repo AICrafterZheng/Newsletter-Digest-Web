@@ -1,16 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
-import Home from './pages/Home';
-import AIFrontiersArticle from './components/Newsletters';
-
+import AIFrontiersArticles from './pages/Newsletters';
+import { ArchiveList } from './pages/ArchiveList';
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          {/* add the article page */}
-          <Route path="/article/:id" element={<AIFrontiersArticle />} />
+          <Route path="/" element={<AIFrontiersArticles limit={20} date={new Date().toISOString()}/>} />
+          <Route path="/articles" element={<AIFrontiersArticles limit={20}/>} />
+          <Route path="/archive" element={<ArchiveList />} />
         </Route>
       </Routes>
     </BrowserRouter>

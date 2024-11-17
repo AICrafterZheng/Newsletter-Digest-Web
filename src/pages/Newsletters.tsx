@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { formatSummary } from '../utils/formatSummary'
+import { useSearchParams } from 'react-router-dom';
 // Types
 interface Story {
   story_id: number
@@ -16,6 +17,7 @@ interface Story {
 interface NewsletterProps {
   source?: string
   limit?: number
+  date?: string
 }
 
 // Card components
@@ -62,7 +64,10 @@ const summaryStyles = `
   }
 `
 
-export default function AIFrontiersArticle({ source, limit }: NewsletterProps) {
+export default function AIFrontiersArticles({ source, limit }: NewsletterProps) {
+  const [searchParams] = useSearchParams();
+  const date = searchParams.get('date') || new Date().toISOString();
+  console.log(date)
   const [stories, setStories] = useState<Story[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -77,6 +82,8 @@ export default function AIFrontiersArticle({ source, limit }: NewsletterProps) {
         const params = new URLSearchParams()
         // if (source) params.append('source', source)
         if (limit) params.append('limit', limit.toString())
+        if (source) params.append('source', source)
+        if (date) params.append('date', date)
         
         // Make sure to use the full URL path
         const response = await fetch(`${apiUrl}/news?${params.toString()}`, {
@@ -125,13 +132,6 @@ export default function AIFrontiersArticle({ source, limit }: NewsletterProps) {
     return <div className="text-center py-8 text-red-600">Error: {error}</div>
   }
 
-  const today = new Date().toLocaleDateString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
-
   return (
     <div className="relative z-0">
       {/* Add the styles to the component */}
@@ -140,7 +140,7 @@ export default function AIFrontiersArticle({ source, limit }: NewsletterProps) {
       <h1 className="text-4xl font-bold text-center text-blue-600 mb-2">
         {source ? `${source} News` : 'Latest News'}
       </h1>
-      <p className="text-center text-gray-600 mb-8">{today}</p>
+      <p className="text-center text-gray-600 mb-8">{new Date(date).toLocaleDateString()}</p>
       
       {stories.length === 0 ? (
         <p className="text-center text-gray-600">No stories found</p>
@@ -167,7 +167,13 @@ export default function AIFrontiersArticle({ source, limit }: NewsletterProps) {
               )}
               <span>•</span>
               <span className="text-gray-600">
-                {new Date(story.created_at).toLocaleTimeString()}
+                {new Date(story.created_at).toLocaleString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
               </span>
             </div>
 
