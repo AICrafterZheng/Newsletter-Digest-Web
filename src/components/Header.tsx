@@ -42,17 +42,17 @@ export const Header: React.FC<HeaderProps> = ({ onSubscribeClick, onDiscordClick
         <div className="flex items-center gap-4">
           <button
             onClick={onSubscribeClick}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5865F2] text-white hover:bg-[#4752C4] transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5865F2] text-white hover:bg-[#4752C4] transition-colors sm:text-base text-sm"
           >
-            <Send className="w-4 h-4" />
+            <Send className="w-4 h-4 sm:block hidden" />
             Subscribe
           </button>
 
           <button
             onClick={onDiscordClick}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5865F2] text-white hover:bg-[#4752C4] transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5865F2] text-white hover:bg-[#4752C4] transition-colors sm:text-base text-sm"
           >
-            <MessageSquare className="w-4 h-4" />
+            <MessageSquare className="w-4 h-4 sm:block hidden" />
             Discord
           </button>
 
@@ -60,9 +60,9 @@ export const Header: React.FC<HeaderProps> = ({ onSubscribeClick, onDiscordClick
             href="https://github.com/yourusername/yourrepo"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+            className="flex items-center gap-3 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors sm:text-base text-sm"
           >
-            <Github className="w-4 h-4" />
+            <Github className="w-4 h-4 sm:block hidden" />
             <div className="flex items-center gap-3 text-sm">
               <span className="flex items-center gap-1">
                 <span>★</span> {githubStats.stars}

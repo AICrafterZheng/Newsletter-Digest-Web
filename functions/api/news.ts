@@ -24,18 +24,21 @@ export async function onRequest(context: any) {
     const url = new URL(context.request.url)
     const source = url.searchParams.get('source')
     const limit = url.searchParams.get('limit')
-
-    // Get UTC start and end of today
-    const now = new Date()
-    const startOfDayUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())).toISOString()
-    const endOfDayUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1)).toISOString()
+    
+    // Get the date from query parameters
+    const dateParam = url.searchParams.get('date') // format: 2024-11-01
+    
+    // Parse the date and create UTC boundaries
+    const date = dateParam ? new Date(dateParam) : new Date()
+    const startOfDay = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())).toISOString()
+    const endOfDay = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + 1)).toISOString()
 
     // Start building the query
     let query = supabase
       .from(context.env.SUPABASE_TABLE_STORIES!)
       .select('*')
-      .gte('created_at', startOfDayUTC)
-      .lt('created_at', endOfDayUTC)
+      .gte('created_at', startOfDay)
+      .lt('created_at', endOfDay)
 
     // Add source filter if provided
     if (source) {

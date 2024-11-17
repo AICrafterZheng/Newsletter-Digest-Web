@@ -21,7 +21,11 @@ npm run dev
 ### Then run Cloudflare Pages locally:
 
 ```bash
+npm run preview:wrangler
+
+# Or
 npx wrangler pages dev ./
+
 ```
 
 ## Deploy to Cloudflare Pages:
