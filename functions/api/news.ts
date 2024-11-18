@@ -27,7 +27,6 @@ export async function onRequest(context: any) {
     
     // Get the date from query parameters
     const dateParam = url.searchParams.get('date') // format: 2024-11-01
-    console.log("dateParam: ", dateParam)
     // Parse the date and create UTC boundaries
     const date = dateParam ? new Date(dateParam) : new Date()
     const startOfDay = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())).toISOString()

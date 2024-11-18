@@ -75,7 +75,6 @@ const getSourcePrefix = (source: string) => {
 export default function AIFrontiersArticles({ source, limit }: NewsletterProps) {
   const [searchParams] = useSearchParams();
   const date = searchParams.get('date') || new Date().toISOString();
-  console.log(date)
   const [stories, setStories] = useState<Story[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -174,16 +173,6 @@ export default function AIFrontiersArticles({ source, limit }: NewsletterProps) 
                   <span className="text-gray-600">Score: {story.score}</span>
                 </>
               )}
-              <span>•</span>
-              <span className="text-gray-600">
-                {new Date(story.created_at).toLocaleString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit'
-                })}
-              </span>
             </div>
 
             <CardContent>
