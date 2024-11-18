@@ -64,6 +64,14 @@ const summaryStyles = `
   }
 `
 
+const getSourcePrefix = (source: string) => {
+  const prefixes: Record<string, string> = {
+    'hackernews': '[Hacker News] ',
+    'techcrunch': '[TechCrunch] '
+  };
+  return prefixes[source.toLowerCase()] || '';
+};
+
 export default function AIFrontiersArticles({ source, limit }: NewsletterProps) {
   const [searchParams] = useSearchParams();
   const date = searchParams.get('date') || new Date().toISOString();
@@ -120,7 +128,6 @@ export default function AIFrontiersArticles({ source, limit }: NewsletterProps) 
         setLoading(false)
       }
     }
-
     fetchStories()
   }, [source, limit])
 
@@ -148,7 +155,9 @@ export default function AIFrontiersArticles({ source, limit }: NewsletterProps) 
         stories.map((story) => (
           <Card key={story.story_id} className="mb-8">
             <CardHeader>
-              <CardTitle>{story.story_title}</CardTitle>
+              <CardTitle>
+                {getSourcePrefix(story.source)}{story.story_title}
+              </CardTitle>
             </CardHeader>
             
             <div className="flex items-center gap-2 px-6 py-2">
